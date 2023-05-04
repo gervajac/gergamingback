@@ -23,19 +23,24 @@ router.get("/items", (req, res) => {
 router.get("/itemsp", async (req, res) => {
   try {
     const page = parseInt(req.query.page) - 1 || 0;
-    const limit = parseInt(req.query.limit) || 5;
+    const limit = parseInt(req.query.limit) || 30;
     const search = req.query.search || "";
     let sort = req.query.sort || "price";
     let category = req.query.category || "all";
 
     const categoryOptions = [
-      "perifericos",
+      "mouse",
       "teclado",
       "gpu",
-      "cpu",
+      "cpuintel",
+      "cpuamd",
       "ssd",
       "ram",
-      "motherboard",
+      "mother",
+      "Gabinete",
+      "fuentes",
+      "Notebook",
+      "auricular"
     ];
 
     category === "all"
@@ -57,6 +62,7 @@ router.get("/itemsp", async (req, res) => {
       .sort(sortBy)
       .skip(page * limit)
       .limit(limit);
+
 
     const total = await itemSchema.countDocuments({
       category: { $in: [...category] },

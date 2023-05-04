@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
 const itemRoutes = require("./routes/items.js");
+const UserRoutes = require("./routes/users.js");
+const checkoutRoutes = require("./routes/checkout.js")
 
 
 const port = process.env.PORT || 9000;
@@ -13,6 +15,8 @@ const port = process.env.PORT || 9000;
 app.use(cors())
 app.use(express.json())
 app.use('/api', itemRoutes);
+app.use('/auth', UserRoutes);
+app.use('/checkout', checkoutRoutes);
 
 app.get('/', (req, res) => {
     res.send("welcome to my api")
